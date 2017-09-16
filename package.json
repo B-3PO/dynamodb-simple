@@ -1,6 +1,6 @@
 {
   "name": "dynamodb-simple",
-  "version": "0.0.1-beta.3",
+  "version": "0.0.1-beta.4",
   "description": "A simple and elegant interface for aws-sdk dynamodb documentClient",
   "keywords": "dynamodb, dynamo, documnetclient, node",
   "license": "MIT",
