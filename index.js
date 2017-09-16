@@ -1,1 +1,1 @@
-export * from './documnetClient';
+module.exports = require('./documnetClient');
