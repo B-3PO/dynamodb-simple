@@ -1,1 +1,1 @@
-module.exports = require('./documnetClient');
+module.exports = require('./lib/documentClient');
