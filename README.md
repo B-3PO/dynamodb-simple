@@ -2,10 +2,24 @@
 A simple and elegant interface for aws-sdk dynamodb documentClient
 
 
+Quick Links:
+* [Config](#config)
+* [table](#table)
+* [scan](#scan)
+* [query](#query)
+* [get](#get)
+* [put](#put)
+* [update](#update)
+* [delete](#delete)
+* [createTable](#createTable)
+* [deleteTable](#deleteTable)
+* [listTables](#listTables)
+* [describeTable](#describeTable)
+
 # Usage
 You can reference [aws DocumentClient documentation](http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/DocumentClient.html#query-property) to get a better understanding of how these methods work under the hood
 
-## config
+## <a name="config"></a> config
 setup aws config
 You can skip this step if you already have credentials setup for aws-sdk
 ```javascript
@@ -19,7 +33,7 @@ dynamodbSimple.config({
 });
 ```
 
-## table
+## <a name="table"></a> table
 Create a table instance;
 ```javascript
 const dynamodbSimple = require('dynamodb-simple');
@@ -33,7 +47,7 @@ const userTable = dynamodbSimple.table('user', 'id', 'age');
 ```
 
 
-## scan
+## <a name="scan"></a> scan
 `FilterExpression` queries
 [FilterExpression Documentation](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Query.html#FilteringResults)
 
@@ -57,7 +71,7 @@ userTable.scan(`name = '${name}' AND age = ${age}`, (err, doc) => {
 });
 ```
 
-## query
+## <a name="query"></a> query
 Query using hash and range to find data. You can configure a table to use just hash or both hash and range
 Write `KeyConditionExpression` queries
 [KeyConditionExpression Documentation](http://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Query.html#DDB-Query-request-KeyConditionExpression)
@@ -89,7 +103,7 @@ userTableWithRange.scan(`id = '${userId}' AND age = ${age} AND name = '${name}'`
 ```
 
 
-## get
+## <a name="get"></a> get
 Get using hash and range to find data. You can configure a table to use just hash or both hash and range
 ```javascript
 const dynamodbSimple = require('dynamodb-simple');
@@ -111,7 +125,7 @@ userTableWithRange.get(userId, age, (err, doc) => {
 });
 ```
 
-## put
+## <a name="put"></a> put
 Put data
 ```javascript
 const dynamodbSimple = require('dynamodb-simple');
@@ -127,7 +141,7 @@ userTable.put(newUser, err => {
 });
 ```
 
-## update
+## <a name="update"></a> update
 Put data
 ```javascript
 const dynamodbSimple = require('dynamodb-simple');
@@ -147,7 +161,7 @@ userTable.update(`SET name = '${newName}', bestFriend = '${bestFriend}', employe
 });
 ```
 
-## delete
+## <a name="delete"></a> delete
 Delete data
 ```javascript
 const dynamodbSimple = require('dynamodb-simple');
@@ -166,5 +180,49 @@ const userTableWithRange = dynamodbSimple.table('user', 'id', 'range');
 userTableWithRange.delete(userId, age, (err, doc) => {
   if (err) return console.log(err);
   console.log(doc);
+});
+```
+
+## <a name="createTable"></a> createTable
+Create Table
+```javascript
+const dynamodbSimple = require('dynamodb-simple');
+
+dynamodbSimple.createTable('tablename', 'hahskey', 'optionalRangeKey', (err, tableInfo) => {
+  if (err) return console.log(err);
+  console.log(tableInfo);
+});
+```
+
+## <a name="deleteTable"></a> deleteTable
+Delete table
+```javascript
+const dynamodbSimple = require('dynamodb-simple');
+
+dynamodbSimple.createTable('tablename', (err, tableInfo) => {
+  if (err) return console.log(err);
+  console.log(tableInfo);
+});
+```
+
+## <a name="listTables"></a> listTables
+List data
+```javascript
+const dynamodbSimple = require('dynamodb-simple');
+
+dynamodbSimple.listTabled((err, tables) => {
+  if (err) return console.log(err);
+  console.log(tables);
+});
+```
+
+## <a name="describeTable"></a> describeTable
+List data
+```javascript
+const dynamodbSimple = require('dynamodb-simple');
+
+dynamodbSimple.describeTabled('tableName', (err, tableInfo) => {
+  if (err) return console.log(err);
+  console.log(tableInfo);
 });
 ```
